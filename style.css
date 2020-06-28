@@ -44,7 +44,19 @@ body {
 @media screen and (max-width: 800px) {
   .container {
     width: 100%; /* The width is 100%, when the viewport is 800px or smaller */
-    padding: 10;
+    padding: 10px;
     box-sizing: border-box;
+  }
+}
+.warning {
+  text-align: center;
+  pointer-events: none;
+  margin: 10 auto;
+  position: fixed;
+  bottom: 40px;
+}
+@media screen and (orientation:landscape) {
+  .warning {
+    display: none;
   }
 }
