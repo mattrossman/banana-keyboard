@@ -5,14 +5,10 @@ let audioReady = false;
 let synth = null
 
 const btnStart = document.querySelector('#btnStart')
-const blocker = document.querySelector('#blocker')
-const scene = document.querySelector('a-scene')
-// scene.pause();
 const keyboard = document.querySelector('#keyboard')
 
 
 btnStart.onclick = async () => {
-  console.log("Starting")
   await Tone.start()
   const tremolo = new Tone.Vibrato(5, 0.05)
   synth = new Tone.PolySynth().chain(tremolo, Tone.Master);
@@ -22,7 +18,6 @@ btnStart.onclick = async () => {
     width: 7,
     notes: 'C4, D4, E4, F4, G4, A4, B4, C5'
   })
-  // scene.play();
 }
 
 
@@ -46,7 +41,7 @@ AFRAME.registerSystem('mouse', {
   init: function() {
     this.isClicked = false;
     
-    this.el.canvas.addEventListener('mousedown', () => { console.log('click'); this.isClicked = true })
+    this.el.canvas.addEventListener('mousedown', () => { this.isClicked = true })
     this.el.canvas.addEventListener('mouseup', () => { this.isClicked = false })
     this.el.canvas.addEventListener('touchstart', () => { this.isClicked = true })
     this.el.canvas.addEventListener('touchend', () => { this.isClicked = false })
