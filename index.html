@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Banana Keyboard</title>
+    <meta name="description" content="Banana Keyboard">
+    <link rel="stylesheet" href="./style.css">
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://unpkg.com/tone@13.8.25"></script>
+    <script src="./app.js" defer></script>
+  </head>
+  <body>
+    <div id="intro" class="on-top fullscreen">
+      <div class="container">
+        <h1>The incredible <i>Banana Keyboard&trade;</i></h1>
+        <p>Just press the bananas to play each note!</p>
+        <p>On a mobile device? Rotate the screen to landscape mode to access all the keys.</p>
+        <button id="btnStart" class="big-button"><h1>Click to start</h1></button>
+      </div>
+    </div>
+    <a-scene background="color: #08eaff" vr-mode-ui="false" renderer="colorManagement: true">
+      <a-assets>
+        <a-asset-item id="a-banana" src="./assets/banana.glb"></a-asset-item>
+      </a-assets>
+      <a-camera position="0 0 10" fov="30" look-controls-enabled="false">
+        <a-entity cursor="rayOrigin: mouse; fuse: false"></a-entity>
+      </a-camera>
+      <a-entity id="keyboard"></a-entity>
+    </a-scene>
+  </body>
+</html>
