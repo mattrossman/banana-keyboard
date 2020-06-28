@@ -14,7 +14,8 @@ const keyboard = document.querySelector('#keyboard')
 btnStart.onclick = async () => {
   console.log("Starting")
   await Tone.start()
-  synth = new Tone.Synth().toMaster();
+  const tremolo = new Tone.Vibrato(5, 0.05)
+  synth = new Tone.PolySynth().chain(tremolo, Tone.Master);
   audioReady = true;
   document.querySelector('#intro').classList.add('hidden');
   keyboard.setAttribute('banana-keyboard', {
@@ -34,9 +35,9 @@ AFRAME.registerSystem('synth', {
       synth.triggerAttack(note)
     }
   },
-  stopNote() {
+  stopNote(note) {
     if (audioReady) {
-      synth.triggerRelease();
+      synth.triggerRelease(note);
     }
   }
 })
@@ -77,14 +78,12 @@ AFRAME.registerComponent('synth-key', {
     if (!this.playing) {
       this.playing = true;
       this.el.sceneEl.systems.synth.startNote(this.data.note)
-      // synth.triggerAttack(this.data.note)
     }
   },
   tryStop() {
     if (this.playing) {
       this.playing = false
-      this.el.sceneEl.systems.synth.stopNote()
-      // synth.triggerRelease();
+      this.el.sceneEl.systems.synth.stopNote(this.data.note)
     }
   },
   tick: function (time, timeDelta) {
